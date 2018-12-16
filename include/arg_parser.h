@@ -1,11 +1,12 @@
 #ifndef ARG_PARS_H
 #define ARG_PARS_H
+#include <stdint.h>
 
 #define NO_ERROR        0
 #define ARG_PARSE_ERROR 1
 #define ARG_ERROR       2
 
-struct {
+typedef struct {
     char* filename;
     int error;
 } arg_t;

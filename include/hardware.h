@@ -1,5 +1,6 @@
 #ifndef HARDWARE_H
 #define HARDWARE_H
+#include <stdint.h>
 
 #define MEMORY_SIZE     10000
 #define PROG_MEM_END    1000
@@ -17,16 +18,6 @@ enum {
     R_COUNT
 };
 
-enum {
-    OPC_ADD = 0,//Add                       - RRR
-    OPC_ADDI,   //Add immediate             - RRI
-    OPC_NADN,   //Nand                      - RRR
-    OPC_LUI,    //Load Upper Immediate      - RI
-    OPC_SW,     //Store Word                - RRI
-    OPC_LW,     //Load Word                 - RRI
-    OPC_BEQ,    //Branch if equal           - RRI
-    OPC_JALR    //Jumpt and link register   - RRI
-};
 /*
  * Instruction formats:
  *
@@ -43,6 +34,14 @@ enum {
  *  | 3 bits    | 3 bits    |  10 bits                      |
  *
  */
+enum {
+    OPC_ADD = 0,//Add                       - RRR OPC_ADDI,   //Add immediate             - RRI OPC_NADN,   //Nand                      - RRR
+    OPC_LUI,    //Load Upper Immediate      - RI
+    OPC_SW,     //Store Word                - RRI
+    OPC_LW,     //Load Word                 - RRI
+    OPC_BEQ,    //Branch if equal           - RRI
+    OPC_JALR    //Jumpt and link register   - RRI
+};
 
 enum {
     FL_POS = 1 << 0,
@@ -50,12 +49,12 @@ enum {
     FL_NEG = 1 << 2
 };
 
-static uint16_t memory[MEMORY_SIZE];
-static uint16_t registers[R_COUNT];
+#define INIT_MEMORY(_name)      static uint16_t _name[MEMORY_SIZE];
+#define INIT_REGISTERS(_name)   static uint16_t _name[R_COUNT];
 
 uint16_t read_mem(int address);
 uint16_t write_mem(int address, uint16_t value);
 
 
-
 #endif //HARDWARE_H
+
