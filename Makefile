@@ -5,7 +5,7 @@
 FLAGS	:= -Wall
 INCLUDE := -I include
 OBJDIR	:= bin
-OBJS	:= $(addprefix $(OBJDIR)/, parser.o arg_parser.o)
+OBJS	:= $(addprefix $(OBJDIR)/, parser.o arg_parser.o hardware.o)
 
 #################################
 # Rules				#

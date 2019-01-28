@@ -23,7 +23,7 @@ enum {
  *
  * RRR - format
  *  | opcode    | reg A     | reg B     | 0         | reg C |
- *  | 3 bits    | 3 bits    | 3 bits    | 4 bots    | 3 bits|
+ *  | 3 bits    | 3 bits    | 3 bits    | 4 bits    | 3 bits|
  *
  * RRI - format
  *  | opcode    | reg A     | reg B     | Signed immediate  |
@@ -35,7 +35,9 @@ enum {
  *
  */
 enum {
-    OPC_ADD = 0,//Add                       - RRR OPC_ADDI,   //Add immediate             - RRI OPC_NADN,   //Nand                      - RRR
+    OPC_ADD = 0,//Add                       - RRR 
+    OPC_ADDI,   //Add immediate             - RRI 
+    OPC_NAND,   //Nand                      - RRR
     OPC_LUI,    //Load Upper Immediate      - RI
     OPC_SW,     //Store Word                - RRI
     OPC_LW,     //Load Word                 - RRI
@@ -49,12 +51,21 @@ enum {
     FL_NEG = 1 << 2
 };
 
-#define INIT_MEMORY(_name)      static uint16_t _name[MEMORY_SIZE];
-#define INIT_REGISTERS(_name)   static uint16_t _name[R_COUNT];
+typedef struct {
+    uint16_t registers[R_COUNT];
+    uint16_t memory[MEMORY_SIZE];
+}vm_hardware_t;
 
-uint16_t read_mem(int address);
-uint16_t write_mem(int address, uint16_t value);
+typedef struct {
+    uint16_t opcode;
+    uint16_t operand[3];
+} instruction_t;
 
+
+#define INIT_HARDWARE(_name) vm_hardware_t _name;
+
+instruction_t fetch_decode(vm_hardware_t hw);
+int init_machine(vm_hardware_t);
 
 #endif //HARDWARE_H
 

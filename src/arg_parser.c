@@ -28,3 +28,5 @@ arg_t parse_arguments(int argc, char** argv) {
     args.error = ARG_PARSE_ERROR;
     return args;
 }
+
+
