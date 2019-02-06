@@ -12,6 +12,8 @@ OBJS	:= $(addprefix $(OBJDIR)/, parser.o arg_parser.o hardware.o)
 #################################
 
 all: $(OBJDIR)/main.exe
+test:
+	@echo "Testing stuff"
 $(OBJDIR)/main.exe: main.c $(OBJS)
 	gcc -o $@ $^ $(FLAGS) $(INCLUDE) 
 
