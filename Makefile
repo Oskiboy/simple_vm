@@ -2,7 +2,7 @@
 # Defines			#
 #################################
 
-FLAGS	:= -Wall
+FLAGS	= -Wall
 INCLUDE := -I include
 OBJDIR	:= bin
 OBJS	:= $(addprefix $(OBJDIR)/, parser.o arg_parser.o hardware.o)
@@ -12,8 +12,12 @@ OBJS	:= $(addprefix $(OBJDIR)/, parser.o arg_parser.o hardware.o)
 #################################
 
 all: $(OBJDIR)/main.exe
+debug: FLAGS+= -g
+debug: all
+
 test:
 	@echo "Testing stuff"
+
 $(OBJDIR)/main.exe: main.c $(OBJS)
 	gcc -o $@ $^ $(FLAGS) $(INCLUDE) 
 
